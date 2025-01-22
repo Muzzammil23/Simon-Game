@@ -51,3 +51,31 @@ body {
   box-shadow: 0 0 20px white;
   background-color: grey;
 }
+
+.start-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  color: #FEF2BF;
+  background-color: #011F3F;
+  border: 3px solid #FEF2BF;
+  border-radius: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #FEF2BF;
+  color: #011F3F;
+  border: 3px solid #011F3F;
+}
+
+.start-button:active {
+  background-color: #FFC300;
+  color: #011F3F;
+  box-shadow: 0 0 10px white;
+}
+
