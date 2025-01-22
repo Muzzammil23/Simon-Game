@@ -9,8 +9,8 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-// Event listener to start the game when any key is pressed on the keyboard.
-$(document).keypress(function() {
+// Event listener to start the game when the screen is touched.
+$(document).on("touchstart", function () {
   // If the game has not started yet:
   if (!started) {
     // Display the current level.
@@ -23,8 +23,7 @@ $(document).keypress(function() {
 });
 
 // Event listener for button clicks.
-$(".btn").click(function() {
-
+$(".btn").on("click touchstart", function () {
   // Get the color of the clicked button.
   var userChosenColour = $(this).attr("id");
   // Add the chosen color to the user's sequence array.
@@ -36,37 +35,36 @@ $(".btn").click(function() {
   animatePress(userChosenColour);
 
   // Check the user's sequence against the game's sequence.
-  checkAnswer(userClickedPattern.length-1);
+  checkAnswer(userClickedPattern.length - 1);
 });
 
 // Function to check the user's sequence against the game's sequence.
 function checkAnswer(currentLevel) {
-
-    // If the current color in the user's sequence matches the game's sequence:
-    if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
-      // And if the entire user's sequence matches the game's sequence:
-      if (userClickedPattern.length === gamePattern.length){
-        // Wait for 1 second, then generate the next color in the sequence.
-        setTimeout(function () {
-          nextSequence();
-        }, 1000);
-      }
-    } else {
-      // If there's a mismatch in the sequence, play an error sound.
-      playSound("wrong");
-      // Add a "game-over" visual effect to the page.
-      $("body").addClass("game-over");
-      // Display the game over message.
-      $("#level-title").text("Game Over, Press Any Key to Restart");
-
-      // Remove the "game-over" effect after 200ms.
+  // If the current color in the user's sequence matches the game's sequence:
+  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+    // And if the entire user's sequence matches the game's sequence:
+    if (userClickedPattern.length === gamePattern.length) {
+      // Wait for 1 second, then generate the next color in the sequence.
       setTimeout(function () {
-        $("body").removeClass("game-over");
-      }, 200);
-
-      // Reset the game.
-      startOver();
+        nextSequence();
+      }, 1000);
     }
+  } else {
+    // If there's a mismatch in the sequence, play an error sound.
+    playSound("wrong");
+    // Add a "game-over" visual effect to the page.
+    $("body").addClass("game-over");
+    // Display the game over message.
+    $("#level-title").text("Game Over, Tap Anywhere to Restart");
+
+    // Remove the "game-over" effect after 200ms.
+    setTimeout(function () {
+      $("body").removeClass("game-over");
+    }, 200);
+
+    // Reset the game.
+    startOver();
+  }
 }
 
 // Function to generate the next color in the game's sequence.
