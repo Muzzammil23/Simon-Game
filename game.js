@@ -11,14 +11,11 @@ var level = 0;
 
 // Event listener to start or restart the game when the button is clicked.
 $(document).ready(function () {
-  // Ensure the DOM is fully loaded before attaching events.
   $("#start-btn").on("click", function () {
-    if (!started) {
-      startOver(); // Reset the game.
-      $("#level-title").text("Level " + level);
-      nextSequence();
-      started = true;
-    }
+    startOver(); // Reset everything.
+    $("#level-title").text("Level " + level);
+    nextSequence(); // Start the game by generating the first sequence.
+    started = true;
   });
 });
 
@@ -107,8 +104,9 @@ function playSound(name) {
 
 // Function to reset the game.
 function startOver() {
-  // Reset the level to 1.
+  // Reset the level and display "Level 1".
   level = 0;
+  $("#level-title").text("Level " + level);
   // Clear the game's sequence array.
   gamePattern = [];
   // Update the status to indicate that the game hasn't started.
