@@ -13,9 +13,8 @@ var level = 0;
 $(document).ready(function () {
   $("#start-btn").on("click", function () {
     startOver(); // Reset everything.
-    $("#level-title").text("Level " + level);
+    started = true; // Mark the game as started.
     nextSequence(); // Start the game by generating the first sequence.
-    started = true;
   });
 });
 
@@ -101,9 +100,7 @@ function playSound(name) {
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
 }
- 
 
-// Function to reset the game.
 // Function to reset the game.
 function startOver() {
   // Reset the level and the game pattern.
@@ -111,8 +108,6 @@ function startOver() {
   gamePattern = [];
   started = false;
 
-  // Trigger the first sequence and update the display.
-  nextSequence();
+  // Reset the title to indicate the start.
+  $("#level-title").text("Press Start to Play");
 }
-
-
