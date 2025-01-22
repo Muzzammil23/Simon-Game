@@ -9,17 +9,18 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-// Event listener to start the game when the screen is touched.
-$(document).on("touchstart", function () {
-  // If the game has not started yet:
-  if (!started) {
-    // Display the current level.
-    $("#level-title").text("Level " + level);
-    // Generate the next color in the sequence.
-    nextSequence();
-    // Update the status to indicate that the game has started.
-    started = true;
+// Event listener to start or restart the game when the button is clicked.
+$("#start-btn").on("click", function () {
+  // Reset the game if it has already started.
+  if (!started || gamePattern.length > 0) {
+    startOver();
   }
+  // Display the current level.
+  $("#level-title").text("Level " + level);
+  // Generate the next color in the sequence.
+  nextSequence();
+  // Update the status to indicate that the game has started.
+  started = true;
 });
 
 // Event listener for button clicks.
@@ -55,15 +56,15 @@ function checkAnswer(currentLevel) {
     // Add a "game-over" visual effect to the page.
     $("body").addClass("game-over");
     // Display the game over message.
-    $("#level-title").text("Game Over, Tap Anywhere to Restart");
+    $("#level-title").text("Game Over! Press Start to Restart");
 
     // Remove the "game-over" effect after 200ms.
     setTimeout(function () {
       $("body").removeClass("game-over");
     }, 200);
 
-    // Reset the game.
-    startOver();
+    // Enable restart by clicking the button again.
+    started = false;
   }
 }
 
