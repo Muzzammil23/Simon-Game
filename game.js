@@ -104,13 +104,15 @@ function playSound(name) {
  
 
 // Function to reset the game.
+// Function to reset the game.
 function startOver() {
-  // Reset the level and set it to 1 for a new game.
-  level = 1;
-  $("#level-title").text("Level " + level);
-  // Clear the game's sequence array.
+  // Reset the level and the game pattern.
+  level = 0;
   gamePattern = [];
-  // Update the status to indicate that the game hasn't started.
   started = false;
+
+  // Trigger the first sequence and update the display.
+  nextSequence();
 }
+
 
