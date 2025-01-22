@@ -10,21 +10,22 @@ var started = false;
 var level = 0;
 
 // Event listener to start or restart the game when the button is clicked.
-$("#start-btn").on("click", function () {
-  // Reset the game if it has already started.
-  if (!started || gamePattern.length > 0) {
-    startOver();
-  }
-  // Display the current level.
-  $("#level-title").text("Level " + level);
-  // Generate the next color in the sequence.
-  nextSequence();
-  // Update the status to indicate that the game has started.
-  started = true;
+$(document).ready(function () {
+  // Ensure the DOM is fully loaded before attaching events.
+  $("#start-btn").on("click", function () {
+    if (!started) {
+      // Display the current level.
+      $("#level-title").text("Level " + level);
+      // Generate the next color in the sequence.
+      nextSequence();
+      // Update the status to indicate that the game has started.
+      started = true;
+    }
+  });
 });
 
 // Event listener for button clicks.
-$(".btn").on("click touchstart", function () {
+$(".btn").on("click", function () {
   // Get the color of the clicked button.
   var userChosenColour = $(this).attr("id");
   // Add the chosen color to the user's sequence array.
