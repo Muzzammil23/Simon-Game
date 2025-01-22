@@ -101,14 +101,16 @@ function playSound(name) {
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
 }
+ 
 
 // Function to reset the game.
 function startOver() {
-  // Reset the level and display "Level 1".
-  level = 0;
+  // Reset the level and set it to 1 for a new game.
+  level = 1;
   $("#level-title").text("Level " + level);
   // Clear the game's sequence array.
   gamePattern = [];
   // Update the status to indicate that the game hasn't started.
   started = false;
 }
+
