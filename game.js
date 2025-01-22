@@ -14,11 +14,9 @@ $(document).ready(function () {
   // Ensure the DOM is fully loaded before attaching events.
   $("#start-btn").on("click", function () {
     if (!started) {
-      // Display the current level.
+      startOver(); // Reset the game.
       $("#level-title").text("Level " + level);
-      // Generate the next color in the sequence.
       nextSequence();
-      // Update the status to indicate that the game has started.
       started = true;
     }
   });
@@ -109,8 +107,9 @@ function playSound(name) {
 
 // Function to reset the game.
 function startOver() {
-  // Reset the level and the game's sequence array.
+  // Reset the level to 1.
   level = 0;
+  // Clear the game's sequence array.
   gamePattern = [];
   // Update the status to indicate that the game hasn't started.
   started = false;
